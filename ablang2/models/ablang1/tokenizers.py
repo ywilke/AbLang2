@@ -10,7 +10,7 @@ class ABtokenizer():
         self.set_vocabs(vocab_dir)
         self.pad_token = self.vocab_to_token['-']
         
-    def __call__(self, sequenceList, encode=True, pad=False, device='cpu'):
+    def __call__(self, sequenceList, encode=True, pad=False, device='cpu', **kwargs):
         #assert isinstance(sequenceList, list)
         
         if encode: 
