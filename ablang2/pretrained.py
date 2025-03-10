@@ -22,7 +22,7 @@ class pretrained(AbEncoding, AbRestore, AbAlignment, AbScores):
         super().__init__()
         
         self.used_device = torch.device(device)
-        
+        self.model_to_use = model_to_use
         self.AbLang, self.tokenizer, self.hparams = load_model(model_to_use)
         self.AbLang.to(self.used_device)
         self.AbLang.eval() # Default 
@@ -43,7 +43,7 @@ class pretrained(AbEncoding, AbRestore, AbAlignment, AbScores):
         """
         if not mode in valid_modes: raise SyntaxError(f"Given mode doesn't exist. Please select one of the following: {valid_modes}.")
 
-        if model_to_use.startswith("ablang2-"):
+        if self.model_to_use.startswith("ablang2-"):
             seqs, chain = format_seq_input(seqs, fragmented = fragmented) 
 
         if align:
