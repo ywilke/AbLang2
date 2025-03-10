@@ -42,8 +42,9 @@ class pretrained(AbEncoding, AbRestore, AbAlignment, AbScores):
         Use different modes for different usecases
         """
         if not mode in valid_modes: raise SyntaxError(f"Given mode doesn't exist. Please select one of the following: {valid_modes}.")
-        
-        seqs, chain = format_seq_input(seqs, fragmented = fragmented) 
+
+        if model_to_use.startswith("ablang2-"):
+            seqs, chain = format_seq_input(seqs, fragmented = fragmented) 
 
         if align:
             numbered_seqs, seqs, number_alignment = self.number_sequences(
